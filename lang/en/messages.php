@@ -1,3 +1,7 @@
 <?php
 
-echo Lang::get('messages.welcome');
+return [
+    'contact' => [
+        'success' => 'Messages successfully sent!'
+    ],
+];
