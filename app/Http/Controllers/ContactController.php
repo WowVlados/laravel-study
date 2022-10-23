@@ -9,20 +9,19 @@ use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
-    public function submit(ContactRequest $req) {
+    public function submit(ContactRequest $req)
+    {
+        $mail = new NewContact(
+            $req->get('name'),
+            $req->get('email'),
+            $req->get('number'),
+        );
 
-                $mail = new NewContact(
-                    $req->get('name'),
-                    $req->get('email'),
-                    $req->get('number'),
-                );
+        Mail::to('info@test.com')->send($mail);
 
-                Mail::to('info@test.com')->send($mail);
+        session()->flash('success', trans('messages.report.success'));
 
-                session()->flash('success', trans('messages.report.success'));
-
-                return redirect()
-                    ->back();
-
+        return redirect()
+            ->back();
     }
 }
